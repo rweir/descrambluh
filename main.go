@@ -55,12 +55,17 @@ func main() {
 	words := parseWords(wordPath)
 
 	orig := []rune(word)
+	// words found already - only print out matching permutations if it's the first time we've found it
+	found := make(map[string]bool, 0)
 	for p := make([]int, len(orig)); p[0] < len(p); nextPerm(p) {
 		permutation := getPerm(orig, p)
 
 		s := string(permutation)
 		if _, ok := words[s]; ok {
-			fmt.Println(s, "was found")
+			if _, ok := found[s]; !ok {
+				fmt.Println(s, "was found")
+			}
+			found[s] = true
 		}
 	}
 }
