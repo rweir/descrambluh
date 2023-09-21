@@ -46,11 +46,21 @@ func parseWords(path string) map[string]bool {
 	return result
 }
 
+// permutationsForString returns how many non-unique permutations it'll have to try.
+func permutationsForString(s string) int {
+	result := 1
+	for i := range s {
+		result *= (i + 1)
+	}
+	return result
+}
+
 func main() {
 	if len(os.Args) < 2 { //nolint:gomnd
 		fmt.Println("Error: need a word.  Usage: descrambluh <someword>")
 	}
 	word := os.Args[1]
+	fmt.Printf("Going to need to check %d permutations\n", permutationsForString(word))
 	wordPath := "/usr/share/dict/words"
 	words := parseWords(wordPath)
 
