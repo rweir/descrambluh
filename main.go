@@ -61,6 +61,9 @@ func main() {
 		permutation := getPerm(orig, p)
 
 		s := string(permutation)
+		if _, ok := found[s]; ok {
+			continue
+		}
 		if _, ok := words[s]; ok {
 			if _, ok := found[s]; !ok {
 				fmt.Println(s, "was found")
